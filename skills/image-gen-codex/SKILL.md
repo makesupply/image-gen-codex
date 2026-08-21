@@ -1,7 +1,7 @@
 ---
 name: image-gen-codex
 description: Generate or edit PNG images through Codex's built-in $imagegen using an existing ChatGPT subscription, with no OpenAI API key or separate image API. Use when the user asks to generate an image, ad visual, carousel card, lifestyle scene, product mockup, or image variant via Codex. Saves to a configured output directory, validates the PNG, and writes a provenance manifest.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Image Gen via Codex — subscription bridge (no API key)
@@ -49,9 +49,21 @@ Repeat `--image` for multiple references. Images attach to the initial Codex pro
 - `--codex PATH`: explicit Codex executable; normally auto-discovered.
 - `--timeout SECONDS`: generation timeout (default 600).
 
+## Prompt craft (read before writing any production prompt)
+
+`references/prompt-craft.md` is the reasoning layer behind the contract below — how to fill each field for photorealism, illustration, spatial composition, and product fidelity. Read it before any production creative. The five things it changes about how you prompt:
+
+- **`$imagegen` renders with the GPT-Image model family.** Native strengths: legible big type, wordmarks, clean hero/product-on-white, diagram/table layouts. Documented weaknesses to compensate for: photoreal handheld/flatlay/lifestyle rendering (it renders *smoother than reality* — load the imperfection/skin/texture cues heavier), a ~5-image reference cap, and it **leans on the text description over the reference for identity** (restate the full description every time; never "same as reference").
+- **Structure beats style words.** Decide the image *format* first, then fill the 8-slot brief (type -> subject -> composition -> modules -> tone -> material -> typography -> aspect ratio). Never open with taste words.
+- **Control the canvas** with vertical %-height regions inside the central **84% safe zone**; match the aspect ratio to the subject's proportions; scale a tall subject down rather than crop a headline.
+- **Preservation fence on every attached product render:** "keep the label/wordmark/colors/proportions intact" **paired with** "no new text, logos, or watermarks added" — so the model neither edits the label nor invents a badge or third-party mark.
+- **Firewall (see Hard Rule 0):** never model-render a trademark you don't own, a fabricated store/shelf scene, or dense text — those go to plain text or a deterministic text layer (e.g. HTML over a model-generated plate). Model-rendered text is safe only for a single large headline/wordmark.
+
+`references/prompt-craft.md` also carries copy-ready templates (hero, flatlay, before/after, UGC, annotated, still-life) and the three always-on safety suffixes to append.
+
 ## Prompt contract
 
-Use the smallest useful production spec:
+Use the smallest useful production spec (see `references/prompt-craft.md` for how to fill each field well):
 
 ```text
 Use case: <ad / social / hero / mockup / etc.>
@@ -73,7 +85,7 @@ For production-critical typography, exact product placement, flat geometric grap
 
 ## Required workflow
 
-1. Read the relevant brief/brand rules. Completion: the prompt cites the correct constraints.
+1. Read the relevant brief/brand rules and — for any production creative — `references/prompt-craft.md`. Completion: the prompt cites the correct constraints and is built as an 8-slot brief, not a pile of style words.
 2. Confirm every reference exists and label each reference's role. Completion: no ambiguous image inputs.
 3. Choose a new path under `<allowed-subdir>/<job>/`. Completion: the path does not already exist.
 4. Run the bridge. Completion: exit code 0 and JSON reports `auth: Logged in using ChatGPT`.
@@ -105,4 +117,5 @@ Read `LEARNINGS.md` before non-trivial runs. When a run reveals a reproducible C
 
 ## Changelog
 
+- v1.1.0 — Added `references/prompt-craft.md`, the prompt reasoning/craft layer: model-reality strengths/weaknesses of the GPT-Image family, the 8-slot brief method, canvas/84%-safe-zone spatial control, photorealism imperfection/skin/texture blocks, lighting recipes, product staging, edit/preservation grammar, JSON-for-complexity, taste-word translation, three safety suffixes, and a copy-ready template catalog. Wired into the prompt contract + workflow step 1.
 - v1.0.0 — Subscription-only agent -> Codex `$imagegen` bridge: auto-discovery, ChatGPT-login guard, `OPENAI_API_KEY` strip, full PNG-chunk validation, provenance manifest, configurable output root/subdir, reference-image attach via stdin-piped prompt.
