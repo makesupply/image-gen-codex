@@ -1,0 +1,18 @@
+# Generated images and their provenance sidecars (do not commit outputs)
+generated/
+**/generated/
+*.manifest.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
