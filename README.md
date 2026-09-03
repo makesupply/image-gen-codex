@@ -2,12 +2,13 @@
 
 Generate and edit images from an AI agent through **Codex's built-in `$imagegen`**, using an existing **ChatGPT subscription** — with **no OpenAI API key** and no separate paid image API.
 
-Two parts, one self-contained skill folder:
+Three parts, one self-contained skill folder:
 
 1. **The bridge** (`tool/generate.py`) — drives the Codex desktop app, enforces subscription-only auth, validates the PNG, writes a provenance manifest. Python stdlib only, zero pip installs.
-2. **The prompt-craft layer** (`references/prompt-craft.md`, v1.1.0) — the *reasoning* an agent needs to write good prompts for photorealism, composition, and product fidelity on the GPT-Image model, plus copy-ready templates and safety suffixes.
+2. **The prompt-craft layer** (`references/prompt-craft.md`) — the *reasoning* an agent needs to write good prompts for photorealism, composition, and product fidelity on the GPT-Image model, plus copy-ready templates and safety suffixes.
+3. **The realism layer** (`references/realism-formula.md`, v1.2) — a physics-level recipe for skin, hair, beards, and product-in-hand shots: a copy-ready Realism Block, a distance ladder so macro language is never written for a selfie, a Hair Realism Block with product-finish physics, a refine protocol with local mask-compositing, worked examples, a QA tell-list, an 8-image A/B validation on Codex, and a test queue for what is still unmeasured. Two rounds of desk research behind it are condensed in `references/research-notes-2026-09.md` with confidence tags.
 
-`SKILL.md` ties them together: it tells an agent when to use the skill, how to invoke the bridge, and points at the craft layer.
+`SKILL.md` ties them together: it tells an agent when to use the skill, how to invoke the bridge, and points at the craft and realism layers.
 
 ## Why
 
@@ -34,7 +35,9 @@ image-gen-codex/
         ├── SKILL.md                  # how/when an agent uses it
         ├── LEARNINGS.md              # reproducible Codex quirks + fixes
         ├── references/
-        │   └── prompt-craft.md       # the prompt reasoning layer (read before production prompts)
+        │   ├── prompt-craft.md       # the prompt reasoning layer (read before production prompts)
+        │   ├── realism-formula.md    # the skin/hair realism layer (read before any person/skin/hair shot)
+        │   └── research-notes-2026-09.md  # condensed research record with confidence tags
         └── tool/
             ├── generate.py           # the bridge (run this)
             └── test_generate.py      # unit tests (stdlib unittest)
@@ -57,7 +60,7 @@ Copy `skills/image-gen-codex/` into your agent's skills directory. Examples:
 Outputs land under `<output-root>/<allowed-subdir>/`, default `<cwd>/generated/`. Set them for your project once via env so the agent doesn't have to pass them every call:
 ```bash
 export IMAGEGEN_OUTPUT_ROOT="/path/to/your/project"
-export IMAGEGEN_OUTPUT_SUBDIR="generated"      # or "_creatives/Generated", "assets/img", etc.
+export IMAGEGEN_OUTPUT_SUBDIR="generated"      # or "assets/generated", "assets/img", etc.
 ```
 (or pass `--output-root` / `--allowed-subdir` per call.)
 
@@ -92,6 +95,18 @@ python tool/generate.py \
 ```
 
 For anything beyond a quick render, read `references/prompt-craft.md` first: decide the image format, build the 8-slot brief, keep text/subjects inside the 84% safe zone, and add the imperfection/skin/texture cues the GPT-Image model needs for photoreal work.
+
+## The realism layer (v1.2)
+
+`references/realism-formula.md` is what to read when a person, skin, hair, a beard, or a hand holding a product is in frame. What it adds over the craft layer, and what the evidence behind it is:
+
+- **A physics recipe, not taste words.** Raking side-top light at 45 degrees so pores cast their own micro-shadows; a named inventory of pore depth, vellus hair, uneven sebum on convex surfaces, subsurface color variation, micro-wrinkles; film grain said once; zero digital sharpening; lifted blacks; soft highlight rolloff. Each clause is explained by the physical cause it names.
+- **A distance ladder.** Macro, close-up, half-body selfie, environmental: which texture words to use and which to drop at each distance. On this engine, macro words in a selfie prompt are ignored and the frame drifts polished; the phone-artifact words carry realism there.
+- **Hair as geometry and material.** Parting line with a scalp strip, root-to-tip flow, strand groups with gaps, perimeter flyaways, no painted highlight band, plus surface physics for matte, satin, and wet-look finishes, a follicle-gradient beard clause, and measurable curl vocabulary.
+- **Edits you can trust.** A bounded refine prompt that enumerates every preserved region, and a local mask-composite so labels, hands, and background cannot drift. Resample and downscale instead of generative enhancement; masters stay placement-native and grain-free.
+- **Evidence.** An 8-image A/B validation on Codex (the formula won all four pairs) and two rounds of desk research condensed in `references/research-notes-2026-09.md`, including the documented fact that Codex's built-in image generation runs `gpt-image-2` with no exposed size or mask controls. Everything still unmeasured is a test queue in §15, not a rule.
+
+Copy-ready blocks are ASCII-clean and drop straight into `--prompt-file` files.
 
 ## How it works (internals)
 

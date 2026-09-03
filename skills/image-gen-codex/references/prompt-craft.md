@@ -8,7 +8,7 @@ Read this before writing any **production** image prompt. It is the craft/reason
 
 ## 0. Model reality — what `$imagegen` actually is
 
-**Codex `$imagegen` renders with the GPT-Image model family.** You generally cannot swap models — treat its strengths and weaknesses as your operating envelope, not a menu.
+**Codex `$imagegen` renders with the GPT-Image model family — documented by OpenAI's Codex docs as `gpt-image-2` (confirmed 2026-09-03; see `realism-formula.md` §2). The integration exposes no size, quality, fidelity, or mask controls, so a prose size is a request and the provenance manifest is the record.** You generally cannot swap models — treat its strengths and weaknesses as your operating envelope, not a menu.
 
 **Native strengths (lean into these):**
 - Legible **text, wordmarks, and typography-led layouts** — big bold headlines render cleanly; diagram/table/UI grammar is well-trained.
@@ -52,7 +52,7 @@ Read this before writing any **production** image prompt. It is the craft/reason
 
 - **Vertical-region % budgeting** is the core layout lever — pre-allocate the canvas top-to-bottom by percentage. The model obeys layout far better when regions are named and sized.
 - **84% safe zone:** all text, headlines, CTAs, wordmarks, and key focal subjects fit within the central 84% (~8% padding every edge). Backgrounds and dividers may bleed; text/focal elements may NOT. **If a tall subject doesn't fit, scale it DOWN — never crop a headline.**
-- **Match the aspect ratio to the focal subject's proportions.** Tall content on a 1:1 canvas clips. Ratios in use: `1:1` (feed square), `4:5` (feed portrait, 1080x1350), `9:16` (Stories/Reels/vertical), `2:3` (tall product/board), `16:9` (landscape/board).
+- **Match the aspect ratio to the focal subject's proportions.** Tall content on a 1:1 canvas clips. Ratios in use: `1:1` (feed square, master 1080x1080), `4:5` (feed portrait, master 1080x1350), `9:16` (Stories/Reels/vertical, master 1080x1920), `2:3` (tall product/board), `16:9` (landscape/board). Master at the placement-native canvas and keep masters grain-free (`realism-formula.md` §4 and §9b).
 - **Reserve negative space for any text overlay.** Generous negative space also carries "premium/restrained."
 - **Name reference roles by index:** "the product in image_ref[0]", "the lighting/mood from image_ref[1]". Improves placement and identity. (~5-ref cap.)
 - **Depth / foreground-background separation:** request it, don't hope for it — "shallow depth of field on the background", "the product slightly overlaps the prop column, creating depth", "soft drop shadow".
@@ -76,12 +76,15 @@ Read this before writing any **production** image prompt. It is the craft/reason
 | Even diffuse overhead softbox | Flatlays, product-on-surface |
 | Uneven ambient indoor, one side of face in shadow | UGC authenticity (deliberately imperfect) |
 | Cinematic museum/plinth pool of light | Prestige/artifact product shots |
+| Raking side-top light at 45 deg ("reveals every pore as a small crater with its own micro-shadow") | Macro / close-up skin, beard, and hair texture: the texture-reveal light. Soft frontal light fills pores flat; raking light casts the micro-shadows that make relief visible. Full recipe in `realism-formula.md` |
 
 **Consistency principle (for edits/composites):** the environment light must match the subject's existing light — same direction, shadow quality, and color temperature, or the composite reads fake.
 
 ---
 
 ## 4. Photorealism levers (weight these heavier — GPT-Image renders smoother than reality)
+
+> **Physics-level recipe (v1.2):** for any shot with a **person, skin, hair, beard, or product-in-hand**, `realism-formula.md` carries the full Realism Block, the distance ladder (macro / close-up / selfie / environmental), the Hair Realism Block with product-finish physics, the two-pass refine protocol with local mask-compositing, the A/B evidence on this engine (4/4 pairs won), and two rounds of research ingest (Monk-plus-undertone tone structure, hair-geometry vocabulary, positive-state constraints over negation, placement-native grain-free masters). Use it for R1-R2 (macro, close-up). The short blocks in 4b-4d below remain the R3 selfie / quick-draft form.
 
 **4a. Camera-hardware framing** — the strongest realism anchor is naming the capture device:
 - UGC/candid: `Raw iPhone front-camera selfie video frame grab.` Add `iPhone front camera wide-angle lens distortion on the extended arm`.
@@ -301,4 +304,4 @@ no third-party logos.
 
 ## 14. One-line operating summary
 
-Decide the **format first**, build the **8-slot brief**, budget the canvas by **vertical % inside the 84% safe zone**, and — because GPT-Image renders *smoother than reality* — load the **imperfection + skin + texture blocks** heavier for anything photoreal, **restate the full description over the reference** for identity, keep the **label-preservation fence** on every attached product render, append the **three safety suffixes**, and **firewall** every third-party trademark, fabricated store scene, and dense-text block out to plain text or a deterministic layer.
+Decide the **format first**, build the **8-slot brief**, budget the canvas by **vertical % inside the 84% safe zone**, and — because GPT-Image renders *smoother than reality* — load the **imperfection + skin + texture blocks** heavier for anything photoreal, **restate the full description over the reference** for identity, keep the **label-preservation fence** on every attached product render, append the **three safety suffixes**, and **firewall** every third-party trademark, fabricated store scene, and dense-text block out to plain text or a deterministic layer. For anything with skin or hair in frame, apply the **Realism Formula** at the correct **distance rung** (`realism-formula.md`): macro words for macro shots, phone-artifact words for selfies, strand-and-finish physics for hair.
