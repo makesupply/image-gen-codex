@@ -37,6 +37,7 @@ image-gen-codex/
         ├── references/
         │   ├── prompt-craft.md       # the prompt reasoning layer (read before production prompts)
         │   ├── realism-formula.md    # the skin/hair realism layer (read before any person/skin/hair shot)
+        │   ├── shot-intents.md       # /intent shorthand -> full-brief expansions (accepted / gated / blocked)
         │   └── research-notes-2026-09.md  # condensed research record with confidence tags
         └── tool/
             ├── generate.py           # the bridge (run this)
@@ -107,6 +108,10 @@ For anything beyond a quick render, read `references/prompt-craft.md` first: dec
 - **Evidence.** An 8-image A/B validation on Codex (the formula won all four pairs) and two rounds of desk research condensed in `references/research-notes-2026-09.md`, including the documented fact that Codex's built-in image generation runs `gpt-image-2` with no exposed size or mask controls. Everything still unmeasured is a test queue in §15, not a rule.
 
 Copy-ready blocks are ASCII-clean and drop straight into `--prompt-file` files.
+
+## Shorthand intents (v1.3)
+
+`references/shot-intents.md` lets the user say `/macro <product>`, `/floating <product>`, `/flatlay`, `/candid`, and so on, and has the agent expand the intent into a full brief on the matching template with the preservation fence, safety suffixes, realism blocks, and firewall already applied. These are intent labels, not model commands: neither ChatGPT nor Codex has image slash commands, and a bare `/floating` sent to the engine is just a one-word prompt. The file sorts the popular "slash hack" vocabulary into accepted intents (mapped to templates this skill owns), gated intents (allowed with a condition, such as before/after only as a labeled concept), blocked intents (fabricated store, shelf, and billboard scenes, fabricated testimonials, meme backgrounds, platform-UI imitation), and off-brand styles kept to concept lanes. A four-image evidence batch is included: the bare words returned uncontrolled canvases and broke label fidelity; the expansions returned exactly 1080x1080 with the label intact.
 
 ## How it works (internals)
 

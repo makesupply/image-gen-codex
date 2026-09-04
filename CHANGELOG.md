@@ -2,6 +2,21 @@
 
 All notable changes to image-gen-codex.
 
+## v1.3.0 — shorthand intents
+
+A shorthand layer that turns short intent names into full briefs, built after checking a popular "ChatGPT slash hacks" document and finding that its "commands" are one-word prompts. No bridge code changed.
+
+- **Added `skills/image-gen-codex/references/shot-intents.md`.**
+  - §1 How the agent expands `/<intent> <subject> [modifiers]`: look up the intent, pick the mapped template, fill the 8-slot brief, apply the preservation fence, safety suffixes, Hard Rule 0, the no-fabricated-placement rule, the text-layer rule, and the Realism Block at the right distance rung; modifiers for aspect, backdrop family, product-in-hand, face, phone, and plain-text availability lines.
+  - §2 Accepted intents mapped to templates this skill already owns: hero and luxury, floating and levitating, macro and material, flatlay and bundle, lifestyle family, candid and UGC and POV, aspirational and street and nightlife, ad-concept family (plate only, text to the text layer), problem/solution as two plates, reel cover, unboxing with real packaging, splash and smoke, orbit and gravity with real objects, museum plinth, scale indicator, lighting-only intents, giant and miniature as concept, loop as a still.
+  - §3 Gated intents with the condition that makes them safe: before/after as labeled concept only; exploded, cutaway, cross-section, transparent, blueprint as illustration only; 360 as a deterministic multi-angle composite; color variants only if real; packaging and gift box only if real; infographic, value-prop, offer, comparison with all text in the text layer; marketplace hero without naming the marketplace; testimonial and social proof only with real consenting people.
+  - §4 Blocked intents with the nearest alternative: storefront, shelf display, billboard and 3D billboard (fabricated placement), green screen (meme and third-party content), duet style (platform UI), trend hop and challenge ad, soundwave. Off-brand style intents parked in concept lanes.
+  - §5 Validity verdict and a four-image evidence batch on Codex with the same product render: bare `/floating` returned an unrequested 1024x1536 portrait of the bottle on a black void with no surface or shadow; bare `/macro` returned 863x1823, a size in no documented list, with the wordmark cropped and side print garbled; the two expansions returned 1080x1080 exactly and matched their briefs.
+  - §6 Worked expansions for `/floating` and `/macro`, copy-ready.
+- **`realism-formula.md` §2**: an unstated size returns an arbitrary canvas; always state aspect and pixels.
+- **`LEARNINGS.md`**: the one-word-prompt lottery, the unstated-size behavior, and the fact that a leading `/` is inert in this bridge (`codex exec` reads the prompt as plain instructions).
+- **`SKILL.md`**: version 1.3.0, a shorthand-layer paragraph in the prompt-craft section, changelog entry. **`README.md`**: layout tree and a "Shorthand intents" section.
+
 ## v1.2.2 — round-2 research ingest
 
 Narrower follow-up research on the questions v1.2.1 left unmeasured. Firm findings promoted into `realism-formula.md` (marked `[R2]`), everything else parked in its §15 test queue with concrete protocols. Condensed record with confidence tags: `skills/image-gen-codex/references/research-notes-2026-09.md`.
