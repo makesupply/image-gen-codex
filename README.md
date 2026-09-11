@@ -38,6 +38,7 @@ image-gen-codex/
         │   ├── prompt-craft.md       # the prompt reasoning layer (read before production prompts)
         │   ├── realism-formula.md    # the skin/hair realism layer (read before any person/skin/hair shot)
         │   ├── shot-intents.md       # /intent shorthand -> full-brief expansions (accepted / gated / blocked)
+        │   ├── product-hero-from-renders.md  # real product renders -> product-accurate hero at HD
         │   └── research-notes-2026-09.md  # condensed research record with confidence tags
         └── tool/
             ├── generate.py           # the bridge (run this)
@@ -112,6 +113,10 @@ Copy-ready blocks are ASCII-clean and drop straight into `--prompt-file` files.
 ## Shorthand intents (v1.3)
 
 `references/shot-intents.md` lets the user say `/macro <product>`, `/floating <product>`, `/flatlay`, `/candid`, and so on, and has the agent expand the intent into a full brief on the matching template with the preservation fence, safety suffixes, realism blocks, and firewall already applied. These are intent labels, not model commands: neither ChatGPT nor Codex has image slash commands, and a bare `/floating` sent to the engine is just a one-word prompt. The file sorts the popular "slash hack" vocabulary into accepted intents (mapped to templates this skill owns), gated intents (allowed with a condition, such as before/after only as a labeled concept), blocked intents (fabricated store, shelf, and billboard scenes, fabricated testimonials, meme backgrounds, platform-UI imitation), and off-brand styles kept to concept lanes. A four-image evidence batch is included: the bare words returned uncontrolled canvases and broke label fidelity; the expansions returned exactly 1080x1080 with the label intact.
+
+## Product-accurate hero (v1.4)
+
+`references/product-hero-from-renders.md` is the repeatable way to put a REAL product into an AI lifestyle or hero scene at high definition. The rule that makes it work: **attach the real product render as an image reference and generate the people and scene from text** — a describe-only prompt returns plausible-but-generic packaging, while an attached render is reproduced faithfully. It covers sourcing and visually verifying the renders (render libraries are often mislabeled), naming each product's form and *relative proportion* under the ~5-image reference cap, the fidelity limit (labels land ~95%; composite the official PNG when you need them pixel-perfect), and reaching an exact output size deterministically — extend the clean background side to a wider aspect, or bake the clear overlay margin into the frame for a placement that crops to a fixed box.
 
 ## How it works (internals)
 

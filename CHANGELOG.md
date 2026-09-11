@@ -2,6 +2,18 @@
 
 All notable changes to image-gen-codex.
 
+## v1.4.0 — product-accurate hero
+
+The repeatable method for putting a real product into an AI scene at high definition, without the model inventing generic packaging.
+
+- **Added `skills/image-gen-codex/references/product-hero-from-renders.md`.**
+  - Core rule: attach the real product render as an `--image` reference and generate the people/scene from text; the engine reproduces an attached product far more faithfully than one it invents (describe-only prompts return generic packaging).
+  - Sourcing: canonical high-resolution renders, verified visually (libraries are often mislabeled), copied inside the output root, one render per product under the ~5-image cap.
+  - Prompting: name each product's exact form, label wording, and size relative to the others; reserve a clean overlay side and cluster subjects opposite; preservation fence on every render.
+  - Fidelity limit: reference-guided ~95%; small label micro-text can garble per run — inspect every label, and composite the official PNG for pixel-perfect packaging.
+  - High definition + exact aspect: `$imagegen` ignores a requested pixel size, so extend the clean background side to a wider aspect (edge-replicate; never a side with a subject), and bake the clear margin into the generated frame for placements that crop to a fixed box.
+- **SKILL.md** version bumped to v1.4.0; the new reference is wired into the Prompt-craft block.
+
 ## v1.3.0 — shorthand intents
 
 A shorthand layer that turns short intent names into full briefs, built after checking a popular "ChatGPT slash hacks" document and finding that its "commands" are one-word prompts. No bridge code changed.
