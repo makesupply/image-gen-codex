@@ -110,6 +110,8 @@ The source is macro-only. Applied unchanged at half-body it does not help: in th
 | **R3 Half-body / UGC selfie** | head + shoulders (+ raised arm) | `Raw phone front-camera selfie video frame grab` or `35-50mm` | tone unevenness, T-zone shine, faint under-eye shadows, `the soft suggestion of pore texture on the nose and cheeks without exaggerated detail`, 1-2 identity marks | clumps / ringlets with gaps, frizz halo, flyaways against the light | window light with one side of the face in shadow; or harsh on-camera flash (candid phone-camera angle) | `phone-sensor grain and noise` | ALL crater / vellus / veins / "dermatological" language |
 | **R4 Environmental** | full body, scene | `35mm f/2.8, environmental` | almost none: `natural skin, not retouched`; hands anatomically correct | silhouette level: hair mass with a few loose strands, flyaways rim-lit | one consistent source; contact shadows under every object | light grain | all skin micro-language; realism is carried by fabric weave, surface wear, clutter, and light consistency |
 
+**Look package per rung (`look-packages.md`):** the ladder sets the *texture* vocabulary; the package sets the *optics and tonal curve*, written as camera + lens + stock = name + visible result + physical cause, never a bare camera name. R1 -> L1 film look with the raking light (or the 100mm macro anchor); R2 -> L1 (film, window-lit plates), L4 (portrait separation, hero cards: eyes precisely focused, lamps meters behind as rounded highlights) or L2 (clean natural detail, whenever the label is in frame); R3 -> the phone package (unchanged) or L2 for a waist-up product demonstration; R4 -> L5 natural depth: `Moderate depth of field; the background remains recognizable but softly separated` replaces the habitual `softly blurred background` whenever the setting carries part of the message. Two rules ride with every package: name the **focus target** (the eyes for a portrait; the label first for a product demonstration), and keep the **three kinds of softness** apart (soft light = gentle shadow edges, soft background = defocus, soft highlight roll-off = gradual transition into the bright areas; none of them requires blurry eyes). When a package already states grain (L1), drop the separate grain sentence: grain is said once.
+
 **Eyes clause (R2 only, copy-ready):** `Eyes: [COLOR] iris with visible radial fibers, one small natural catchlight, individual short eyelashes, fine under-eye texture.` One catchlight, never a ring — a ring-shaped catchlight is the ring-light tell the negative list bans.
 
 **R3 block (copy-ready, replaces the RB at selfie distance; pair with the imperfection block from `prompt-craft` §4b):**
@@ -191,6 +193,8 @@ perfectly intact. No new text, no new logos, no watermarks, no extra product cop
 ```
 The product itself stays brand-new (no scratches, no dust — the e-commerce rule). The *skin and product surface* carry the realism; the *packaging* carries fidelity.
 
+**Focus target for a product demonstration (`look-packages.md` §3c):** at R2-R3 the portrait rungs' shallow, eyes-first depth of field lets the label go soft — in-hand plates inherit exactly that. For any frame where the product is being shown or used, write the priority: `Moderate depth of field chosen for a product demonstration: the face and the product label both stay readable; the label is the sharpest point in the frame and the eyes a close second; only the far wall softens.` Pair it with L2 (clean natural detail) and name the product surface as one of the two or three surfaces that matter. At R1 the macro rule stands (critical sharpness on the product surface or the wordmark).
+
 ---
 
 ## 7. Slot libraries
@@ -250,6 +254,8 @@ The standing safety suffixes (`prompt-craft` §11) still apply to any ad-creativ
 **[R] Observable-exclusion variant:** `Avoid: a beauty-filter finish, waxy or porcelain skin, uniform stamped pores, oily full-face gloss, ring-light catchlights, painted beard shapes, helmet-like hair, repeated identical curls, aggressive sharpening, crushed shadows.` Every item names something you can *see* in the output, which is what a natural-language constraint can act on. Use whichever list is shorter for the shot. The Avoid line is a secondary constraint, not a verified negative channel (§2).
 
 **[R2] Positive state beats negation (controlled DALL-E 3 lineage research found plain negation handled poorly):** every constraint that matters must exist in the prompt body as a *desired physical state*; the Avoid line only echoes it. Pattern: `Use soft off-axis window light. Keep the catchlights broad and irregular. Do not use a circular frontal catchlight.` The first two sentences do the work; the third is the echo. Check the RB the same way: `ring light` in the Avoid line is backed by `one small natural catchlight` and `raking side-top light` in the body; `airbrushed` is backed by the pore inventory; `helmet hair` is backed by the strand-group sentences. An Avoid item with no positive counterpart in the body is a wish, not an instruction.
+
+Two more positive forms (`look-packages.md` §3f): `Deep charcoal shadows retain subtle texture: shadow detail preserved inside every pore and between the curls` for blocked-up blacks (the positive form of "lifted blacks / no crushed shadows"), and `The eyes are the sharpest point in the frame; all sharpness is optical` in place of any `soft focus` / `not tack sharp` wording — the three kinds of softness (light, background, highlight roll-off) are separate physical conditions and none of them requires blurry eyes.
 
 ---
 
@@ -450,6 +456,7 @@ video, not a professional photo: raw, unpolished, authentically amateur. No reto
 filter, no studio lighting, no airbrushed skin, no flawless complexion, no exaggerated pore detail.
 No text, no logos, no watermark.
 ```
+**Look-layer update:** E6 stays as the validated record. For production, replace `soft focus, nothing tack sharp` with the R3 three-softness line (`look-packages.md` §3b: the eyes the sharpest point, motion softness only on the hair edges and the raised hand, a gentle highlight roll-off where the light hits the forehead) and `not tack sharp` with `no digital sharpening` — validated as pair 03 of the look-package batch (`look-packages.md` §6).
 
 ---
 
@@ -467,6 +474,7 @@ Look for these at 100% zoom before the output leaves the generated folder:
 - **Missing contact shadows** under the product or hand; **floating** anything.
 - **Hands**: count fingers, check the grip; **label**: read every word against the reference render.
 - **Over-symmetry** (mirror-perfect face) and **no identity marks** — add one mark from §7c.
+- **Blurry eyes at R2-R3** — a softness conflation (`soft focus`, `not tack sharp`, "soft image"); rewrite with the eyes as the focus target (`look-packages.md` §3b). **Soft label in an in-hand frame** — the product-demonstration focus rule is missing (§6). **Background mush at R4** when the setting carries the message — ask for moderate depth of field, recognizable but softly separated (L5). **Flare with no source, or round bokeh where oval was asked** — L3 needs one practical near the frame edge and distant lights outside the focus plane.
 - **After any refine, upscale, or composite [R2]:** compare against the original at 200 percent on face landmarks, fingers, product or tin outline, cap geometry, logo placement, and every printed character. Any change = reject that pass; composite only the accepted region over the original instead (§9a).
 
 ---
@@ -494,6 +502,7 @@ A six-question brief and a narrower eight-question follow-up were run through Pe
 
 ## 14. Integration — where this plugs into the skill
 
+- `look-packages.md` sits one level above this file: the optics and tonal curve per rung (L1 film / L2 clean / L3 anamorphic / L4 separation / L5 depth, each as name + visible result + cause), the focus-target rule for product demonstrations (§6 here), and the three-softness rule. The texture inventory, the HRB, and the fence are unchanged by it.
 - `prompt-craft.md` §3 lighting table carries the **raking side-top 45 deg (texture reveal)** recipe; §4 points here for the full block; §13 templates `T-UGC` and `T-BeforeAfter` take the R3 block and the HRB respectively.
 - Spokesperson / founder stills -> **E2** (identity anchor first, then RB at R2), only with the person's consent.
 - Cut-out plates for composited layouts -> R2 / R3 with the HRB; any third-party mark stays in the deterministic layer (Hard Rule 0).

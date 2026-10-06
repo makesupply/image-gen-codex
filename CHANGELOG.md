@@ -2,6 +2,20 @@
 
 All notable changes to image-gen-codex.
 
+## v1.5.0 — look packages
+
+The look layer: camera, lens, and film stock as visible outcomes, not bare names. Adapted from a publicly shared field guide on camera and lens setups for AI video (attributed; its text not reproduced; camera-movement guidance left out). No bridge code changed.
+
+- **Added `skills/image-gen-codex/references/look-packages.md`.**
+  - §1 The rule: NAME + visible RESULT + physical CAUSE. A bare camera name is a taste word in a costume; a result without a cause is a wish.
+  - §2 Five packages, each with when to use it, the ladder rung, what to ask for, a copy-ready stills line, and the fix when it fails: L1 film look (ARRICAM LT / Cooke S4/i 50mm / VISION3 500T daylight-corrected — grain, gradual highlight roll-off, texture in skin and fabric; "if blurry: sharp eyes, gentle roll-off, fine grain"), L2 clean natural detail (Sony VENICE 2 / ZEISS Supreme Prime 50mm T2.8 — name the two or three surfaces that matter; "if clinical: natural edge detail, subtle skin variation, soft side light"), L3 anamorphic character (RED V-RAPTOR / Laowa Proteus 45mm 2x — one flare tied to a practical near the frame edge, vertically oval bokeh from distant lights outside the focus plane), L4 portrait separation (Laowa Argus spherical — eyes precisely focused, lamps meters behind as rounded highlights; "create distance, not just blur"), L5 natural depth (ALEXA Mini LF / Signature Prime 47mm T2.8 — moderate depth of field, the background recognizable but softly separated; "keep some of the world in the shot"). The phone package is unchanged.
+  - §3 Practice rules: describe the cause, not the effect (a table of effect words and their buildable conditions); the three kinds of softness (light, background, highlight roll-off) are separate and none requires blurry eyes; choose the focus target in every prompt, with the product-demonstration rule (the label the sharpest point, the face a close second, moderate depth of field); assign each reference a job and say what not to take from it; fix one thing at a time and judge a phrase on more than one result; positive wording (`deep charcoal shadows retain subtle texture`); state the white balance rather than letting a stock imply it.
+  - §4 Symptom-to-lever table. §5 Integration map (ladder rungs, capture modes incl. a `night` mode, shot-intent look aliases, templates). §6 Five A/B pairs on Codex, same subject / framing / size per pair, only the look wording changed: 5/5 to the packages (window-lit portrait, in-hand product demo with a real render, phone selfie with the three-softness rewrite only, anamorphic night street, natural-depth outdoor court). §7 Not adopted: camera movement (video only).
+- **`prompt-craft.md`**: §2 depth bullet now describes the cause ("create distance, not just blur"); §3 gains the practical-lights / anamorphic row; §4a rewritten as look packages with the focus-target DOF rule and an explicit white-balance line; §4b and §4g drop `soft focus, nothing tack sharp` / `not tack sharp` for "the eyes stay the sharpest point"; §13 T-UGC updated; §14 summary extended.
+- **`realism-formula.md`**: §4 gains the look-package-per-rung note (R4 takes "recognizable but softly separated"); §6 gains the product-demonstration focus rule; §8 gains two positive forms; §10 E6 carries the three-softness production note; §11 gains the blurry-eyes / soft-label / background-mush / sourceless-flare tells; §14 lists the new file.
+- **`shot-intents.md`**: look aliases `/film`, `/clean`, `/anamorphic` (`/night`), `/separation`, `/depth` as modifiers; `/nightlife` expands through L3; `/streetstyle` through L5.
+- **`SKILL.md`**: version 1.5.0, a look-layer paragraph in the prompt-craft section, workflow step 1, changelog entry. **`README.md`**: layout tree and a "Look packages" section. **`LEARNINGS.md`**: the batch's reproducible findings.
+
 ## v1.4.0 — product-accurate hero
 
 The repeatable method for putting a real product into an AI scene at high definition, without the model inventing generic packaging.

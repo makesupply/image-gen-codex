@@ -19,7 +19,7 @@
 4. Writes the prompt to `<allowed-subdir>/<job>/prompts/<name>.txt` and runs the bridge with the product render attached as `image_ref[0]`.
 5. Inspects against `prompt-craft` §10 / `realism-formula` §11 before delivering.
 
-Modifiers the user may add and how they map: `4:5` / `9:16` / `1:1` -> aspect and placement-native master size; `dark` / `light` -> backdrop family; `hand` -> product-in-hand (`realism-formula` §6, R1); `face` -> R2 with the Realism Block; `phone` -> R3 UGC block; a retailer or marketplace name -> a plain-text availability line only, never a mark.
+Modifiers the user may add and how they map: `4:5` / `9:16` / `1:1` -> aspect and placement-native master size; `dark` / `light` -> backdrop family; `hand` -> product-in-hand (`realism-formula` §6, R1); `face` -> R2 with the Realism Block; `phone` -> R3 UGC block; a look alias (`/film`, `/clean`, `/anamorphic` or `/night`, `/separation`, `/depth`) -> the matching package L1-L5 in `look-packages.md` §2; a retailer or marketplace name -> a plain-text availability line only, never a mark.
 
 ---
 
@@ -33,7 +33,8 @@ Modifiers the user may add and how they map: `4:5` / `9:16` / `1:1` -> aspect an
 | `/flat_lay`, `/kit_layflat`, `/bundle_shot` | T-Flatlay | Top-down, even overhead softbox, grid or radial arrangement, only real companion products (attach each render), no invented accessories |
 | `/lifestyle`, `/morningroutine`, `/workspace`, `/travel`, `/dayinmylife` | T-Hero in an environment, R4 | Golden-hour or window light recipe, product in use or at rest in a believable scene, environment clutter carries realism; person present -> R2/R3 blocks |
 | `/candid`, `/ugc_ad`, `/pov_ad` | T-UGC, R3 | Raw phone front-camera frame, imperfection block, R3 skin block, Hair Realism Block if hair shows; `pov_ad` = first-person hands holding the product, phone lens distortion |
-| `/aspirational`, `/streetstyle`, `/nightlife` | T-Hero in an environment, R3/R4 | Aspirational = elevated environment without status props that imply claims; nightlife = practical-light recipe, tungsten and neon spill, no bar signage or third-party marks |
+| `/aspirational`, `/streetstyle`, `/nightlife` | T-Hero in an environment, R3/R4 | Aspirational = elevated environment without status props that imply claims; streetstyle = L5 natural depth (the street stays recognizable); nightlife = package L3 (`look-packages.md`): practical lights that belong in the scene, one brief flare tied to a source near the frame edge, vertically oval bokeh at distance, the face kept readable; no bar signage, no readable lettering, no third-party marks |
+| `/film`, `/clean`, `/anamorphic` (`/night`), `/separation`, `/depth` | Look packages L1-L5 (`look-packages.md` §2) | Optics + tonal-curve modifiers, not shot types: camera + lens + stock written as name + visible result + physical cause; combine with a shot intent above; each carries its fix-if-it-fails line and the focus-target rule (eyes for a portrait, the label first for a product demonstration) |
 | `/scrollstopper`, `/adcreative`, `/social_ad`, `/conversion_ad`, `/product_drop`, `/productlaunch`, `/viral_ad` | T-Hero plate + deterministic text layer | The model renders the plate only; any headline, price, or CTA goes to the text layer; "viral" and "conversion" are not visual instructions, so the agent asks for the one concept before expanding |
 | `/problem_solution` | Two-plate concept | Two clean plates (problem state, product state) composed deterministically side by side; never a results claim; no before/after skin or hair transformation implied as fact |
 | `/reelcover` | 9:16 plate + text-layer headline | 1080x1920 master, subject in the central safe zone, headline typography deterministic |

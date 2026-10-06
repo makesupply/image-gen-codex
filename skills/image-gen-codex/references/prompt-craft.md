@@ -55,7 +55,7 @@ Read this before writing any **production** image prompt. It is the craft/reason
 - **Match the aspect ratio to the focal subject's proportions.** Tall content on a 1:1 canvas clips. Ratios in use: `1:1` (feed square, master 1080x1080), `4:5` (feed portrait, master 1080x1350), `9:16` (Stories/Reels/vertical, master 1080x1920), `2:3` (tall product/board), `16:9` (landscape/board). Master at the placement-native canvas and keep masters grain-free (`realism-formula.md` §4 and §9b).
 - **Reserve negative space for any text overlay.** Generous negative space also carries "premium/restrained."
 - **Name reference roles by index:** "the product in image_ref[0]", "the lighting/mood from image_ref[1]". Improves placement and identity. (~5-ref cap.)
-- **Depth / foreground-background separation:** request it, don't hope for it — "shallow depth of field on the background", "the product slightly overlaps the prop column, creating depth", "soft drop shadow".
+- **Depth / foreground-background separation:** request it, don't hope for it — and describe the *cause*, not the effect: "the subject close to the camera, the lights several meters behind, well outside the focus plane" beats "soft-blurred background" ("create distance, not just blur", `look-packages.md` §3a). Then the arrangement: "the product slightly overlaps the prop column, creating depth", "soft drop shadow". When the setting is part of the message, ask for "moderate depth of field; the background remains recognizable but softly separated" rather than a blur.
 - **Product hero sizing:** give the product an explicit frame fraction — "the product occupies roughly 45-55% of the frame, centered."
 - **Deliberate off-kilter realism:** small rotations sell "hand-arranged" — "slightly rotated counter-clockwise about 5 degrees", "tilted ~3 degrees, hand-arranged feel."
 - **Angle/height vocabulary:** eye-level, slightly-low upward, high-angle/top-down, low-angle, cross-section. Long lens (85mm+) compresses/flatters; wide/fisheye (12-18mm) exaggerates near objects and curves edges.
@@ -76,6 +76,7 @@ Read this before writing any **production** image prompt. It is the craft/reason
 | Even diffuse overhead softbox | Flatlays, product-on-surface |
 | Uneven ambient indoor, one side of face in shadow | UGC authenticity (deliberately imperfect) |
 | Cinematic museum/plinth pool of light | Prestige/artifact product shots |
+| Practical lights in frame (a tungsten lamp near the frame edge; distant windows / tail lights outside the focus plane) + anamorphic character | Night street, lit interior, car interior, barber station: one brief horizontal flare tied to the practical, vertically oval bokeh at distance, the face kept readable by a soft practical fill. Package L3 in `look-packages.md` |
 | Raking side-top light at 45 deg ("reveals every pore as a small crater with its own micro-shadow") | Macro / close-up skin, beard, and hair texture: the texture-reveal light. Soft frontal light fills pores flat; raking light casts the micro-shadows that make relief visible. Full recipe in `realism-formula.md` |
 
 **Consistency principle (for edits/composites):** the environment light must match the subject's existing light — same direction, shadow quality, and color temperature, or the composite reads fake.
@@ -86,14 +87,14 @@ Read this before writing any **production** image prompt. It is the craft/reason
 
 > **Physics-level recipe (v1.2):** for any shot with a **person, skin, hair, beard, or product-in-hand**, `realism-formula.md` carries the full Realism Block, the distance ladder (macro / close-up / selfie / environmental), the Hair Realism Block with product-finish physics, the two-pass refine protocol with local mask-compositing, the A/B evidence on this engine (4/4 pairs won), and two rounds of research ingest (Monk-plus-undertone tone structure, hair-geometry vocabulary, positive-state constraints over negation, placement-native grain-free masters). Use it for R1-R2 (macro, close-up). The short blocks in 4b-4d below remain the R3 selfie / quick-draft form.
 
-**4a. Camera-hardware framing** — the strongest realism anchor is naming the capture device:
-- UGC/candid: `Raw iPhone front-camera selfie video frame grab.` Add `iPhone front camera wide-angle lens distortion on the extended arm`.
-- Editorial/product: name a body + lens + aperture — `Sony A7III / Canon EOS R5 / Hasselblad`, `85mm f/1.4` (portrait compression), `50mm f/1.8` (clean lookbook), `35mm f/2.8` (environmental), `macro 120mm f/4` (product detail).
-- DOF rule: shallow (f/1.4-f/2.8) for portraits/hero; deep (f/5.6-f/11) for full-product-in-focus.
-- Film/grade: `Kodak Portra 400` (warm, nostalgic, natural skin, subtle grain); "clean cinematic color grading with subtle warmth."
+**4a. Camera-hardware framing — as a LOOK PACKAGE: name + visible result + physical cause** (`look-packages.md`) — naming the capture device is the strongest realism anchor, but a bare camera name is a taste word in a costume. Pair it with what the viewer will *see* and the arrangement that produces it:
+- UGC/candid: `Raw iPhone front-camera selfie video frame grab.` Add `iPhone front camera wide-angle lens distortion on the extended arm`; the eyes still the sharpest point (a phone locks focus on a face).
+- Editorial / product / lifestyle: pick a package — **L1 film look** (ARRICAM LT + Cooke S4/i 50mm, Kodak VISION3 500T daylight-corrected: fine organic grain, gradual highlight roll-off, texture in skin and fabric weave), **L2 clean natural detail** (Sony VENICE 2 + ZEISS Supreme Prime 50mm T2.8: natural skin tones, readable surface detail, name the 2-3 surfaces that matter), **L3 anamorphic character** (RED V-RAPTOR + Laowa Proteus 45mm 2x: one flare tied to a practical in frame, vertically oval bokeh at distance), **L4 portrait separation** (Laowa Argus spherical, wide aperture: eyes precisely focused, rounded highlights from lamps meters behind), **L5 natural depth** (ALEXA Mini LF + Signature Prime 47mm T2.8: moderate depth of field, the background recognizable but softly separated). Copy-ready lines and the fix-if-it-fails for each are in `look-packages.md` §2.
+- DOF written as a **focus target** (`look-packages.md` §3c): portrait = `the eyes are the sharpest point in the frame`; product demonstration = `moderate depth of field so the face and the product label both stay readable; the label the sharpest point`; full-product e-commerce = deep (f/5.6-f/11).
+- Film/grade: a stock name carries a temperature prior the engine may ignore; state the white balance explicitly (`daylight-corrected color`, `neutral white balance`, or `a faint warm cast by choice`) and say grain **once** (the package already carries it).
 
 **4b. Imperfection block** (include 4-5 for UGC — defeats the "AI influencer" look):
-`slight motion blur on hair strands` - `slightly overexposed highlights on forehead and nose` - `visible image grain and noise` - `wide-angle lens distortion on the extended arm` - `slightly off-center framing, tilted a few degrees` - `washed out flat color grading` - `soft focus, nothing tack sharp` - `uneven ambient indoor lighting` - `caught mid-blink or mid-word, not a perfect expression`.
+`slight motion blur on hair strands` - `slightly overexposed highlights on forehead and nose` - `visible image grain and noise` - `wide-angle lens distortion on the extended arm` - `slightly off-center framing, tilted a few degrees` - `washed out flat color grading` - `the eyes stay the sharpest point; slight motion softness only on the raised hand and the hair edges` (replaces `soft focus, nothing tack sharp`: soft light, a soft background, and soft highlight roll-off are three different conditions and none of them needs blurry eyes, `look-packages.md` §3b) - `uneven ambient indoor lighting` - `caught mid-blink or mid-word, not a perfect expression`.
 
 **4c. Skin-realism block** (pick 3-4, place INLINE with the character description, not in the imperfection block):
 `natural skin with visible pores` - `slight unevenness in skin tone` - `minor undereye shadows` - `a hint of shine on the nose and forehead from natural oils` - `slight pinkness on cheeks and nose` - `minor skin texture variation` - `the kind of skin you see on a real person's unfiltered front camera`.
@@ -110,7 +111,7 @@ Read this before writing any **production** image prompt. It is the craft/reason
 - For a specific real person: `CRITICAL CHARACTER LIKENESS: the subject is the exact same person in the reference photos. Match the face exactly: [describe features]. Maintain the exact facial proportions, eye shape, and skin tone. Do not generalize.`
 
 **4g. Anti-polish negative line** (append to any realism target):
-`No retouching, no beauty filter, no studio lighting, not a professional photo, not overly polished, not perfectly composed, not tack sharp. No airbrushed skin, no flawless complexion.`
+`No retouching, no beauty filter, no studio lighting, not a professional photo, not overly polished, not perfectly composed, no digital sharpening (the eyes still the sharpest point). No airbrushed skin, no flawless complexion.`
 
 **4h. Commit sentence:** end UGC prompts with `This must look like an unedited frame pulled from a real iPhone selfie video, NOT a professional photo. Raw, unpolished, authentically amateur.`
 
@@ -272,7 +273,8 @@ genuine relaxed half-smile mid-word. Setting: a real [ROOM] in warm morning wind
 the face slightly in shadow. Natural skin with visible pores, a hint of shine on the nose and forehead,
 minor undereye shadows. Slight motion blur on hair strands, slightly overexposed highlights on the
 forehead, visible image grain, wide-angle lens distortion on the extended arm, slightly off-center
-tilted framing, washed-out flat color grading, soft focus. This must look like an unedited frame from a
+tilted framing, washed-out flat color grading; the eyes stay the sharpest
+point, softness only on the raised hand and the hair edges. This must look like an unedited frame from a
 real iPhone selfie video, not a professional photo: raw, unpolished, authentically amateur. No
 retouching, no beauty filter, no studio lighting, no airbrushed skin. No text, no logos, no store imagery.
 ```
@@ -304,4 +306,4 @@ no third-party logos.
 
 ## 14. One-line operating summary
 
-Decide the **format first**, build the **8-slot brief**, budget the canvas by **vertical % inside the 84% safe zone**, and — because GPT-Image renders *smoother than reality* — load the **imperfection + skin + texture blocks** heavier for anything photoreal, **restate the full description over the reference** for identity, keep the **label-preservation fence** on every attached product render, append the **three safety suffixes**, and **firewall** every third-party trademark, fabricated store scene, and dense-text block out to plain text or a deterministic layer. For anything with skin or hair in frame, apply the **Realism Formula** at the correct **distance rung** (`realism-formula.md`): macro words for macro shots, phone-artifact words for selfies, strand-and-finish physics for hair.
+Decide the **format first**, build the **8-slot brief**, budget the canvas by **vertical % inside the 84% safe zone**, and — because GPT-Image renders *smoother than reality* — load the **imperfection + skin + texture blocks** heavier for anything photoreal, **restate the full description over the reference** for identity, keep the **label-preservation fence** on every attached product render, append the **three safety suffixes**, and **firewall** every third-party trademark, fabricated store scene, and dense-text block out to plain text or a deterministic layer. For anything with skin or hair in frame, apply the **Realism Formula** at the correct **distance rung** (`realism-formula.md`): macro words for macro shots, phone-artifact words for selfies, strand-and-finish physics for hair. Carry the look as a **package** — camera + lens + stock written as name + visible result + physical cause (`look-packages.md`), name the **focus target** in every prompt, keep the **three softnesses** apart (none of them needs blurry eyes), and describe the **cause** of any bokeh, flare, or separation rather than the effect.

@@ -39,6 +39,7 @@ image-gen-codex/
         │   ├── realism-formula.md    # the skin/hair realism layer (read before any person/skin/hair shot)
         │   ├── shot-intents.md       # /intent shorthand -> full-brief expansions (accepted / gated / blocked)
         │   ├── product-hero-from-renders.md  # real product renders -> product-accurate hero at HD
+        │   ├── look-packages.md      # camera + lens + stock as name + visible result + cause (the look layer)
         │   └── research-notes-2026-09.md  # condensed research record with confidence tags
         └── tool/
             ├── generate.py           # the bridge (run this)
@@ -117,6 +118,10 @@ Copy-ready blocks are ASCII-clean and drop straight into `--prompt-file` files.
 ## Product-accurate hero (v1.4)
 
 `references/product-hero-from-renders.md` is the repeatable way to put a REAL product into an AI lifestyle or hero scene at high definition. The rule that makes it work: **attach the real product render as an image reference and generate the people and scene from text** — a describe-only prompt returns plausible-but-generic packaging, while an attached render is reproduced faithfully. It covers sourcing and visually verifying the renders (render libraries are often mislabeled), naming each product's form and *relative proportion* under the ~5-image reference cap, the fidelity limit (labels land ~95%; composite the official PNG when you need them pixel-perfect), and reaching an exact output size deterministically — extend the clean background side to a wider aspect, or bake the clear overlay margin into the frame for a placement that crops to a fixed box.
+
+## Look packages (v1.5)
+
+`references/look-packages.md` is the look layer: camera, lens, and film stock written as **name + visible result + physical cause**, never a bare camera name. Five packages with copy-ready stills lines and the fix when each fails (L1 film look, L2 clean natural detail, L3 anamorphic character with practical lights, L4 portrait separation, L5 natural depth), plus the practice rules that make them work: describe the cause not the effect, keep the three kinds of softness apart (soft light, soft background, soft highlight roll-off — none of them needs blurry eyes), name the focus target in every prompt (the label first in a product demonstration), give each reference a job and an exclusion, fix one thing at a time, positive wording, and a stated white balance. A symptom-to-lever table and a five-pair A/B batch on Codex (5/5 to the packages) close it. Adapted from a publicly shared camera-and-lens field guide for AI video; camera movement is left to video tools.
 
 ## How it works (internals)
 
