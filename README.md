@@ -67,9 +67,11 @@ export IMAGEGEN_OUTPUT_SUBDIR="generated"      # or "assets/generated", "assets/
 ```
 (or pass `--output-root` / `--allowed-subdir` per call.)
 
+If your global Codex default model is one the ChatGPT backend rejects, pin a supported one too: `export IMAGEGEN_CODEX_MODEL="gpt-5.6-sol"` (or pass `--model` per call).
+
 **4. Verify (do this once after wiring).**
 ```bash
-python skills/image-gen-codex/tool/test_generate.py -v   # 18 tests, no Codex needed
+python skills/image-gen-codex/tool/test_generate.py -v   # 19 tests, no Codex needed
 python skills/image-gen-codex/tool/generate.py --help
 # then one real smoke generation (needs Codex + ChatGPT login):
 python skills/image-gen-codex/tool/generate.py \
@@ -136,6 +138,7 @@ Copy-ready blocks are ASCII-clean and drop straight into `--prompt-file` files.
 
 - **"Codex was not found."** Open/update the Codex desktop app, or put `codex` on PATH, or pass `--codex /path/to/codex`.
 - **"not authenticated through the ChatGPT subscription."** Run `codex login`, choose **Sign in with ChatGPT**. API-key login is rejected on purpose.
+- **"The '<model>' model is not supported when using Codex with a ChatGPT account."** Your global Codex default model is not served to ChatGPT logins. Pass `--model gpt-5.6-sol` (or set `IMAGEGEN_CODEX_MODEL`) to a model your login accepts.
 - **Timed out.** Rerun once with `--timeout 900`.
 - **"Output must be below ..."** The output path is outside `<output-root>/<allowed-subdir>`. Fix the path or set `--allowed-subdir`.
 - **Non-ASCII prompt errors on an old build.** This bridge sends UTF-8; if you hit `input is not valid UTF-8` on a locale-bound Codex build, keep the prompt ASCII-only.

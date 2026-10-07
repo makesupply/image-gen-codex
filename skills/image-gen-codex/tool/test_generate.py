@@ -160,6 +160,19 @@ class CommandTests(unittest.TestCase):
         )
         self.assertNotIn("Use $imagegen", command)
 
+    def test_pins_model_only_when_given(self):
+        default = codex_imagegen.build_command(
+            executable=Path("codex.exe"), references=[], last_message=Path("last.txt")
+        )
+        self.assertNotIn("-m", default)
+        pinned = codex_imagegen.build_command(
+            executable=Path("codex.exe"),
+            references=[],
+            last_message=Path("last.txt"),
+            model="gpt-5.6-sol",
+        )
+        self.assertEqual(pinned[pinned.index("-m") + 1], "gpt-5.6-sol")
+
 
 class RunGenerationTests(unittest.TestCase):
     def test_pipes_prompt_to_codex_stdin(self):

@@ -211,6 +211,7 @@ def build_command(
     executable: Path,
     references: list[Path],
     last_message: Path,
+    model: str | None = None,
 ) -> list[str]:
     """Build a shell-free Codex command; the prompt is piped separately on stdin."""
     command = [
@@ -221,6 +222,10 @@ def build_command(
         "--output-last-message",
         str(last_message),
     ]
+    # Pin the Codex agent model when given: the global config default can be one the
+    # ChatGPT-account backend rejects (400 "model is not supported ... ChatGPT account").
+    if model:
+        command.extend(["-m", model])
     for reference in references:
         command.extend(["-i", str(reference)])
     return command
@@ -278,6 +283,7 @@ def run_generation(
     references: list[Path],
     executable: Path,
     timeout: int,
+    model: str | None = None,
 ) -> dict[str, object]:
     """Invoke subscription-backed Codex, then verify and record the result."""
     auth_status = require_chatgpt_login(executable)
@@ -291,7 +297,7 @@ def run_generation(
     ) as handle:
         last_message = Path(handle.name)
 
-    command = build_command(executable, references, last_message)
+    command = build_command(executable, references, last_message, model)
     env = os.environ.copy()
     env.pop("OPENAI_API_KEY", None)
     try:
@@ -365,6 +371,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help=f"Required output area under the root (default: $IMAGEGEN_OUTPUT_SUBDIR or '{DEFAULT_SUBDIR}')",
     )
     parser.add_argument("--codex", help="Explicit codex executable; normally auto-discovered")
+    parser.add_argument(
+        "--model",
+        help="Codex agent model passed as -m (default: $IMAGEGEN_CODEX_MODEL, else Codex's own default)",
+    )
     parser.add_argument("--timeout", type=int, default=600, help="Generation timeout in seconds")
     parser.add_argument("--force", action="store_true", help="Allow replacing the named output")
     return parser.parse_args(argv)
@@ -395,6 +405,7 @@ def main(argv: list[str] | None = None) -> int:
             references=references,
             executable=executable,
             timeout=args.timeout,
+            model=args.model or os.environ.get("IMAGEGEN_CODEX_MODEL") or None,
         )
     except (BridgeError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

@@ -2,6 +2,15 @@
 
 All notable changes to image-gen-codex.
 
+## v1.5.1 — pin the Codex agent model
+
+Bridge fix. `codex exec` runs on the `model` in the user's global `~/.codex/config.toml`. With Codex CLI 0.146.0 and a global default of `gpt-6.1-sol`, every job failed in about five seconds with `400 invalid_request_error: The 'gpt-6.1-sol' model is not supported when using Codex with a ChatGPT account.` The bridge never passed a model, so it inherited the rejected default.
+
+- **`tool/generate.py`**: new `--model MODEL` (or env `IMAGEGEN_CODEX_MODEL`), passed to `codex exec` as `-m`. Unset keeps Codex's own default, so existing setups behave exactly as before. This is the Codex agent that calls the built-in image tool; images still render with GPT-Image.
+- **`tool/test_generate.py`**: a test that `-m` is added only when a model is given (19 tests).
+- **Verified live**: nine of nine concurrent `$imagegen` renders with `--model gpt-5.6-sol`, all `Logged in using ChatGPT`, valid PNGs and manifests. `gpt-5.5` is also accepted on the same login.
+- **`SKILL.md`** 1.5.1 (Configuration, Failure handling, changelog), **`README.md`** (configuration, troubleshooting, test count), **`LEARNINGS.md`** entry.
+
 ## v1.5.0 — look packages
 
 The look layer: camera, lens, and film stock as visible outcomes, not bare names. Adapted from a publicly shared field guide on camera and lens setups for AI video (attributed; its text not reproduced; camera-movement guidance left out). No bridge code changed.
